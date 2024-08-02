@@ -1,0 +1,57 @@
+{
+  "name": "analog-discovery",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@analogjs/platform:vite",
+      "defaultConfiguration": "production",
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "sourcemap": false,
+          "mode": "production"
+        }
+      },
+      "outputs": [
+        "{options.outputPath}",
+        "{workspaceRoot}/dist/analog-discovery/.nitro",
+        "{workspaceRoot}/dist/analog-discovery/ssr",
+        "{workspaceRoot}/dist/analog-discovery/analog"
+      ],
+      "options": {
+        "main": "analog-discovery/src/main.ts",
+        "configFile": "analog-discovery/vite.config.ts",
+        "outputPath": "dist/analog-discovery/client",
+        "tsConfig": "analog-discovery/tsconfig.app.json"
+      }
+    },
+    "serve": {
+      "executor": "@analogjs/platform:vite-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "analog-discovery:build",
+        "port": 4200
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "analog-discovery:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "analog-discovery:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@analogjs/vitest-angular:test",
+      "outputs": [
+        "{projectRoot}/coverage"
+      ]
+    }
+  },
+  "tags": [],
+  "sourceRoot": "./analog-discovery/src"
+}

@@ -4,7 +4,7 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideFileRouter } from '@analogjs/router';
 
 import { provideTrpcClient } from '../trpc-client';
-
+import { withComponentInputBinding } from '@angular/router';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,8 +12,7 @@ export const appConfig: ApplicationConfig = {
     provideFileRouter(),
     provideClientHydration(),
     provideHttpClient(withFetch()),
-
     provideTrpcClient(),
-
+    provideFileRouter(withComponentInputBinding()),
   ],
 };
